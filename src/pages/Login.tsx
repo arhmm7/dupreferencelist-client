@@ -1,8 +1,4 @@
 import { LoginForm } from "@/components/login-form"
-import { AuthContext } from "@/contexts/AuthContext"
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-
 
 export default function Login() {
 

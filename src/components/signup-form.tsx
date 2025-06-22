@@ -50,7 +50,7 @@ export function SignupForm({
         password,
         referCode
       })
-
+      console.log(res);
       toast.success("Signed up successfully!")
       setTimeout(() => navigate("/login"), 1000)
     } catch (err: any) {

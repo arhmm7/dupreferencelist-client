@@ -1,10 +1,8 @@
-// src/pages/Dashboard.tsx
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -144,7 +142,7 @@ const courseOptions = [
 ];
 
 
-  const {userData , setUserData} = useContext(AuthContext);
+  const {userData} = useContext(AuthContext);
   let navigate = useNavigate();
 
   useEffect(() => {

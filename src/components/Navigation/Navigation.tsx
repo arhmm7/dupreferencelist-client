@@ -1,11 +1,9 @@
-import React from 'react'
 import { FiLogIn , FiPlus } from "react-icons/fi";
 
 
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,

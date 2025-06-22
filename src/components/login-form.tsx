@@ -26,8 +26,9 @@ export function LoginForm({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { userData, setUserData } = useContext(AuthContext);
+  const { setUserData } = useContext(AuthContext);
   const navigate = useNavigate();
+
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

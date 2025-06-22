@@ -1,7 +1,4 @@
 import { ThemeProvider } from "@/components/theme-provider"
-import Navigation from "./components/Navigation/Navigation"
-
-import { Button } from "@/components/ui/button"
 import {  Routes, Route} from "react-router-dom"
 import Home from './pages/Home'
 import Login from "./pages/Login"
