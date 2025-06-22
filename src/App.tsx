@@ -8,6 +8,7 @@ import Pricing from "./pages/Pricing"
 import { AuthContext } from "./contexts/AuthContext"
 import { useState } from "react"
 import { Toaster } from 'react-hot-toast';
+import PrivacyPolicy from "./pages/PrivacyPolicy"
 
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route path="/signup" element={<Signup/>}></Route>
           <Route path="/pricing" element={<Pricing/>}></Route>
           <Route path="/dashboard" element={<Dashboard/>}></Route>
+          <Route path="/privacy-policy" element={<PrivacyPolicy/>}></Route>
         </Routes>
       </AuthContext.Provider>
      </ThemeProvider>
