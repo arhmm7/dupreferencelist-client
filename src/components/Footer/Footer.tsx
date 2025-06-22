@@ -8,7 +8,7 @@ function Footer() {
     <div className='w-[100vw] text-center p-3'>
         <p className="pt-2 pb-2 text-[10px] text-white">© {new Date().getFullYear()} Pinecore. All rights reserved.</p>
     </div>
-    <div className="flex text-xs text-gray-300 underline pb-2">
+    <div className="flex text-xs text-gray-300 underline pb-5">
         <Link to="/privacy-policy"><p>Privacy Policy</p></Link>
     </div>
     </>      
