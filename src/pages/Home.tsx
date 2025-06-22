@@ -66,13 +66,45 @@ function Home() {
                     <AccordionItem value="item-1">
                         <AccordionTrigger>How does it work?</AccordionTrigger>
                         <AccordionContent>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam nisl mauris, commodo ut rhoncus vel, malesuada non augue. Nulla facilisi. In dignissim justo id massa scelerisque, vel aliquet lorem feugiat. Maecenas augue lectus, sodales id condimentum vel, facilisis eget metus. Nam et tortor in purus tempor dictum et at odio. Donec suscipit odio sed diam molestie tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse pretium tincidunt est, sed blandit velit venenatis non. Integer consectetur nisi in commodo cursus. Phasellus porta purus eu posuere molestie. Maecenas a gravida turpis, nec iaculis massa. Nullam ac egestas arcu. Aliquam erat volutpat. Nunc elementum elit a ultrices blandit. Nullam consectetur magna eu urna eleifend feugiat. 
+                            How It Works
+
+                            Creating your DU preference list has never been this simple.
+                            Here’s how the tool works:
+
+                            <br></br> 1. Register on the Website
+                            Sign up on dupreferencelist.in to begin your personalized preference-building journey.
+                            
+                            <br></br> 2. Select Your Course Preferences
+                            Choose one or multiple courses you’re interested in. These could be anything from B.Com (Hons) to BA (Hons) Political Science.
+
+                            <br></br> 3. Select Your College Preferences
+                            Pick the colleges you're considering — again, you can select as many as you like.
+
+                            <br></br> 4. Set Your Priority
+                            Use our unique priority slider to tell us what matters more to you:
+
+                            Slide towards college if you prioritize campus, location, or college reputation.
+
+                            Slide towards course if academic strength and department quality are your top concern.
+
+                            You can also set a balanced approach by adjusting the bar somewhere in between.
+
+                            <br></br> 5. Make a Small Payment
+                            Complete a nominal payment through our secure payment gateway to unlock your results.
+
+                            <br></br> 6. Get Your Curated Preference List
+                            Based on your inputs and our research-backed algorithm, you’ll receive a customized and optimized preference list — made just for you, ready to upload on the CSAS portal.
+                                                    
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
-                        <AccordionTrigger>About me</AccordionTrigger>
+                        <AccordionTrigger>About Us</AccordionTrigger>
                         <AccordionContent>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam nisl mauris, commodo ut rhoncus vel, malesuada non augue. Nulla facilisi. In dignissim justo id massa scelerisque, vel aliquet lorem feugiat. Maecenas augue lectus, sodales id condimentum vel, facilisis eget metus. Nam et tortor in purus tempor dictum et at odio. Donec suscipit odio sed diam molestie tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse pretium tincidunt est, sed blandit velit venenatis non. Integer consectetur nisi in commodo cursus. Phasellus porta purus eu posuere molestie. Maecenas a gravida turpis, nec iaculis massa. Nullam ac egestas arcu. Aliquam erat volutpat. Nunc elementum elit a ultrices blandit. Nullam consectetur magna eu urna eleifend feugiat. 
+                            dupreferencelist.in is a student-built initiative proudly owned and operated by Pinecore, a collective of students pursuing diverse fields like technology, management, and data science. As Delhi University students and aspirants ourselves, we deeply understand how confusing and overwhelming the CSAS preference-filling process can be.
+                            That’s why we’ve come together to build a curated, easy-to-use tool designed to make the DU admissions journey simpler, smarter, and more strategic.
+                            At the core of our platform is one mission:
+                            👉 To help DU aspirants create a personalized, well-ordered preference list based on what matters most to them — course quality, college reputation, or both.
+                            We’ve combined real insights, department-wise rankings, and student feedback to build a tool that takes the guesswork out of preference-filling — giving you clarity, confidence, and control over your choices.
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
