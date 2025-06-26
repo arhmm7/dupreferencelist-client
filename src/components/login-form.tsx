@@ -22,6 +22,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+
   const [viewPassword, setViewPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,31 +30,34 @@ export function LoginForm({
   const { setUserData } = useContext(AuthContext);
   const navigate = useNavigate();
 
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  if (!(email && password)) {
+    toast.error('All fields are required!');
+    return;
+  }
 
-    if (!(email && password)) {
-      toast.error('All fields are required!');
-      return;
-    }
+  try {
+    const res = await axios.post(import.meta.env.VITE_BACKEND+"auth/login", {
+      email,
+      password
+    });
 
-    try {
-      const res = await axios.post("http://localhost:3000/auth/login", {
-        email,
-        password
-      });
+    const { user, token } = res.data;
 
-      toast.success("Logged in successfully!");
-      setUserData(res.data.user);
-      localStorage.setItem("token", res.data.token);
+    setUserData(user);
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
+    axios.defaults.headers.common['Authorization'] = token;
 
-      setTimeout(() => navigate("/dashboard"), 1000);
-    } catch (err: any) {
-      const msg = err?.response?.data?.message || "Login failed";
-      toast.error(msg);
-    }
-  };
+    toast.success("Logged in successfully!");
+    navigate("/dashboard");
+  } catch (err: any) {
+    const msg = err?.response?.data?.message || "Network error. Please try again.";
+    toast.error(msg);
+  }
+};
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -81,12 +85,6 @@ export function LoginForm({
               <div className="grid gap-3">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
-                  <a
-                    href="#"
-                    className="text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
                 </div>
                 <div className="relative">
                   <Input

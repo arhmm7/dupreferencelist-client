@@ -25,7 +25,7 @@ function PrivacyPolicy() {
         <br/><br/>
         10. MODIFICATION TO PRIVACY POLICY: We may modify, revise or change our Policy from time to time; when we do, we will revise the ‘updated date’ at the beginning of this page. We encourage You to check our Platform frequently to see the recent changes. Unless stated otherwise, our current Policy applies to all information that we have about You.
         <br/><br/>
-        11. GRIEVANCES: If you have any questions about this Policy, wish to exercise your rights, concerns about privacy or grievances, please write to us with a thorough description via email to mauliksanwal27@gmail.com.
+        11. GRIEVANCES: If you have any questions about this Policy, wish to exercise your rights, concerns about privacy or grievances, please write to us with a thorough description via email to contact@dupreferencelist.in
         <br/><br/>
         <b>COUNTRY SPECIFIC ADDITIONAL RIGHTS</b>
         <br/><br/>

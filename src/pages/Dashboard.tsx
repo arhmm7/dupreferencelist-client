@@ -7,7 +7,16 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-import { Slider } from "@/components/ui/slider"
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
+
 
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -47,121 +56,341 @@ function Dashboard() {
   const [courseList, setCourseList] = useState<string[]>([])
 
 const collegeOptions = [
-  "Sri Ram College of Commerce (SRCC)",
-  "Hansraj College",
-  "St. Stephen's College",
-  "Hindu College",
-  "Lady Shri Ram College for Women (LSR)",
-  "Miranda House",
-  "Ramjas College",
-  "Kirori Mal College",
-  "Sri Venkateswara College",
-  "Indraprastha College for Women",
+  "Acharya Narendra Dev College",
+  "Aditi Mahavidyalaya (W)",
+  "Aryabhatta College",
+  "Atma Ram Sanatan Dharma College",
+  "Bhagini Nivedita College",
+  "Bharati College",
+  "Bhaskaracharya College of Applied Sciences",
+  "College of Vocational Studies",
+  "Cluster Innovation Centre",
   "Daulat Ram College",
-  "Shaheed Bhagat Singh College",
-  "Shaheed Rajguru College of Applied Sciences for Women",
+  "Deen Dayal Upadhyaya College",
+  "Delhi College of Arts & Commerce",
+  "Deshbandhu College",
+  "Department of German and Romance Studies",
+  "Dr. Bhim Rao Ambedkar College",
+  "Dyal Singh College",
+  "Dyal Singh Evening College",
   "Gargi College",
+  "Hansraj College",
+  "Hindu College",
+  "Indraprastha College for Women",
+  "Institute of Home Economics",
+  "Janki Devi Memorial College",
   "Jesus and Mary College",
+  "Kalindi College",
   "Kamala Nehru College",
+  "Keshav Mahavidyalaya",
+  "Kirori Mal College",
+  "Lady Irwin College",
+  "Lady Shri Ram College for Women",
+  "Lakshmibai College",
+  "Maharaja Agrasen College",
   "Maitreyi College",
   "Mata Sundri College for Women",
-  "Delhi College of Arts and Commerce",
-  "Sri Guru Tegh Bahadur Khalsa College",
-  "Sri Guru Gobind Singh College of Commerce",
-  "Sri Aurobindo College",
-  "Dyal Singh College",
-  "Acharya Narendra Dev College",
-  "Aryabhatta College",
-  "Bhaskaracharya College of Applied Sciences",
-  "Bharati College",
-  "Deshbandhu College",
-  "Kalindi College",
-  "Lakshmibai College",
-  "P.G.D.A.V. College",
+  "Miranda House",
+  "Motilal Nehru College (Day)",
+  "Motilal Nehru College (Evening)",
+  "PGDAV College (Day)",
+  "PGDAV College (Evening)",
   "Rajdhani College",
-  "Satyawati College",
+  "Ram Lal Anand College",
+  "Ramanujan College",
+  "Ramjas College",
+  "Satyawati College (Day)",
+  "Satyawati College (Evening)",
+  "Shaheed Bhagat Singh College (Day)",
+  "Shaheed Bhagat Singh Evening College",
+  "Shaheed Rajguru College of Applied Sciences for Women",
+  "Shaheed Sukhdev College of Business Studies",
   "Shivaji College",
+  "Shri Ram College of Commerce",
   "Shyam Lal College",
-  "Vivekananda College",
-  "Zakir Husain Delhi College",
+  "Shyam Lal College (Evening)",
+  "Shyama Prasad Mukherji College (for Women)",
+  "Sri Aurobindo College (Day)",
+  "Sri Aurobindo College (Eve.)",
+  "Sri Guru Gobind Singh College of Commerce",
+  "Sri Guru Nanak Dev Khalsa College",
+  "Sri Guru Tegh Bahadur Khalsa College",
+  "Sri Venkateswara College",
+  "St. Stephen's College",
   "Swami Shraddhanand College",
-  "Motilal Nehru College",
-  "Rajguru College of Applied Sciences",
-  "Aditi Mahavidyalaya",
-  "Bhagini Nivedita College",
-  "Keshav Mahavidyalaya",
-  "Deen Dayal Upadhyaya College",
-  "Institute of Home Economics",
-  "Cluster Innovation Centre (CIC)",
-  "School of Open Learning (SOL)",
-  "Non-Collegiate Women's Education Board (NCWEB)"
+  "Vivekananda College",
+  "Zakir Husain Delhi College (Day)",
+  "Zakir Husain Delhi College (Evening)",
+  "Delhi School of Journalism",
+  "Indira Gandhi Institute of Physical Education and Sports Sciences"
 ];
+
 
 const courseOptions = [
-  "BCom (Hons)",
-  "BCom (Programme)",
-  "BBA Financial Investment Analysis (BBA FIA)",
+  "B.Com. (Hons.)",
+  "B.Com. (Prog.)",
+  "B.Sc. (Hons.) Physics",
+  "B.Sc. (Hons.) Chemistry",
+  "B.Sc. (Hons.) Mathematics",
+  "B.Sc. (Hons.) Electronics",
+  "B.Sc. (Hons.) Computer Science",
+  "B.Sc. (Hons.) Statistics",
+  "B.Sc. (Hons.) Instrumentation",
+  "B.Sc. (Hons.) Geology",
+  "B.Sc. (Hons.) Environmental Science",
+  "B.Sc. (Hons.) Biomedical Science",
+  "B.Sc. (Hons.) Botany",
+  "B.Sc. (Hons.) Zoology",
+  "B.Sc. (Hons.) Microbiology",
+  "B.Sc. (Hons.) Biochemistry",
+  "B.Sc. (Hons.) Food Technology",
+  "B.Sc. (Hons.) Polymer Science",
+  "B.Sc. (Hons.) Home Science",
+  "B.Sc. (Hons.) Psychology",
+  "B.Sc. (Prog.) Life Sciences",
+  "B.Sc. (Prog.) Physical Science (Chemistry/Computer Science/Electronics)",
+  "B.Sc. (Prog.) Mathematical Science",
+  "B.Sc. (Prog.) Applied Physical Science (Industrial Chemistry)",
+  "B.A. (Hons.) Economics",
+  "B.A. (Hons.) Business Economics",
+  "B.A. (Hons.) English",
+  "B.A. (Hons.) Hindi",
+  "B.A. (Hons.) History",
+  "B.A. (Hons.) Political Science",
+  "B.A. (Hons.) Psychology",
+  "B.A. (Hons.) Sociology",
+  "B.A. (Hons.) Sanskrit",
+  "B.A. (Hons.) Philosophy",
+  "B.A. (Hons.) Geography",
+  "B.A. (Hons.) Journalism",
+  "B.A. (Hons.) Social Work",
+  "B.A. (Hons.) Music",
+  "B.A. (Hons.) Urdu",
+  "B.A. (Hons.) Punjabi",
+  "B.A. (Hons.) French",
+  "B.A. (Hons.) German",
+  "B.A. (Hons.) Spanish",
+  "B.A. (Hons.) Italian",
+  "B.A. (Prog.)",
+  "B.A. (VS)",
   "Bachelor of Management Studies (BMS)",
-  "BA (Hons) Political Science",
-  "BA (Hons) Economics",
-  "BA (Hons) English",
-  "BA (Hons) Hindi",
-  "BA (Hons) History",
-  "BA (Hons) Philosophy",
-  "BA (Hons) Psychology",
-  "BA (Hons) Sociology",
-  "BA (Hons) Sanskrit",
-  "BA (Hons) Urdu",
-  "BA (Hons) Arabic",
-  "BA (Hons) Persian",
-  "BA (Hons) Punjabi",
-  "BA (Hons) Applied Psychology",
-  "BSc (Hons) Physics",
-  "BSc (Hons) Chemistry",
-  "BSc (Hons) Mathematics",
-  "BSc (Hons) Statistics",
-  "BSc (Hons) Botany",
-  "BSc (Hons) Zoology",
-  "BSc (Hons) Anthropology",
-  "BSc (Hons) Computer Science",
-  "BSc (Hons) Electronics",
-  "BSc (Hons) Biomedical Sciences",
-  "BSc (Hons) Home Science",
-  "BSc (Programme) Life Sciences",
-  "BSc (Programme) Physical Sciences",
-  "BSc (Programme) Applied Physical Sciences",
-  "BSc (Programme) Mathematical Sciences",
-  "BSc (Programme) Industrial Chemistry",
-  "Bachelor of Elementary Education (B.El.Ed)",
-  "Bachelor of Arts (Hons) Journalism",
-  "Bachelor of Fine Arts (BFA)",
-  "BTech Information Technology and Mathematical Innovations",
-  "BA (Hons) Multimedia and Mass Communication (BMMMC)",
-  "Bachelor of Business Economics (BBE)",
-  "Bachelor of Vocational Studies (B.Voc)"
+  "Bachelor of Business Administration (Financial Investment Analysis) – BBA(FIA)",
+  "Bachelor of Elementary Education (B.El.Ed.)",
+  "Bachelor of Technology (B.Tech.) – IT & Mathematical Innovations",
+  "B.Voc. Healthcare Management",
+  "B.Voc. Retail Management & IT",
+  "B.Voc. Software Development",
+  "B.Voc. Banking Operations",
+  "B.Voc. Web Designing",
+  "Five-Year Integrated Programme in Journalism",
+  "B.Sc. in Physical Education, Health Education & Sports (B.Sc. PE, HE & S)"
 ];
 
 
-  const {userData} = useContext(AuthContext);
+
+
+  const {userData,setUserData} = useContext(AuthContext);
   let navigate = useNavigate();
 
   useEffect(() => {
     if (!userData) {
       toast.error("Please login to continue");
-      navigate("/login"); 
+      navigate("/login");
     }
-  }, [userData]);
+  }, [userData, navigate]);
+
+  const [isProcessing, setIsProcessing] = useState(false);
+
   
   const [showList,setShowList] = useState(false);
+  type PreferenceItem = {
+    rank: string;
+    college: string;
+    course: string;
+  };
 
-  const generateList = () => {
-    toast.loading('Generating Preference List');
-    setShowList(true);
-    
+  const [list, setList] = useState<PreferenceItem[]>([]);
+
+const generateList = async () => {
+
+  if(isProcessing) return;
+  setIsProcessing(true);
+
+  if (courseList.length === 0) {
+    toast.error("Please add at least one course");
+    setIsProcessing(false);
+    return;
+  }
+
+  if (courseList.length > 5) {
+    toast.error("You can select up to 5 courses only");
+    setIsProcessing(false);
+    return;
   }
 
 
+  toast.loading("Processing Payment...");
 
+  try {
+    const orderRes = await fetch(import.meta.env.VITE_BACKEND+"payment/createOrder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        amount: 99,
+        user_id: userData?.id,
+      }),
+    });
+
+    const orderData = await orderRes.json();
+    if (!orderRes.ok) {
+      toast.dismiss();
+      toast.error(orderData.message || "Failed to create payment order");
+      return;
+    }
+
+    const { id: razorpay_order_id, amount } = orderData;
+
+    const options = {
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      amount,
+      currency: "INR",
+      name: "DU Preference Generator",
+      description: "Preference List Access",
+      order_id: razorpay_order_id,
+      handler: async function (response: any) {
+        toast.loading("Verifying Payment...");
+
+        const verifyRes = await fetch(import.meta.env.VITE_BACKEND+"payment/verifyPayment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            user_id: userData?.id,
+            amount: amount / 100,
+          }),
+        });
+
+        const verifyData = await verifyRes.json();
+        if (!verifyRes.ok) {
+          toast.dismiss();
+          toast.error(verifyData.message || "Payment verification failed");
+          return;
+        }
+
+        const genRes = await fetch(import.meta.env.VITE_BACKEND+"api/generateList", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            preferredCourses: courseList,
+            preferredColleges: collegeList,
+            razorpay_order_id,
+          }),
+        });
+
+        const data = await genRes.json();
+        toast.dismiss();
+
+        if (!genRes.ok) {
+          toast.error(data.message || "Failed to generate list");
+          console.log(data.raw || data.error);
+          return;
+        }
+
+        toast.success("List Generated!");
+        setList(data.list);
+        setShowList(true);
+      },
+      theme: {
+        color: "#0d9488",
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  } catch (err) {
+    toast.dismiss();
+    toast.error("Something went wrong");
+    console.error(err);
+  }
+  setIsProcessing(false);
+};
+
+const downloadPDF = () => {
+  const doc = new jsPDF();
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(22);
+  doc.setTextColor(40);
+  doc.text("DU Preference List", 14, 22);
+
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(100);
+  doc.text("Generated Preference Order", 14, 30);
+
+  doc.setFontSize(10);
+  doc.setTextColor(150);
+  doc.text("Generated using dupreferencelist.in", 14, 36);
+
+  const tableData = list.map((item, index) => [
+    index + 1,
+    item.college,
+    item.course,
+  ]);
+
+  autoTable(doc, {
+    head: [["S.No.", "College", "Course"]],
+    body: tableData,
+    startY: 42,
+    theme: "grid",
+    headStyles: {
+      fillColor: [33, 33, 33],
+      textColor: [255, 255, 255],
+      fontStyle: "bold",
+      fontSize: 12,
+    },
+    bodyStyles: {
+      fontSize: 11,
+      textColor: [50, 50, 50],
+    },
+    alternateRowStyles: {
+      fillColor: [245, 245, 245],
+    },
+    columnStyles: {
+      0: { cellWidth: 20, halign: "center" },
+      1: { cellWidth: 80 },
+      2: { cellWidth: 80 },
+    },
+    styles: {
+      cellPadding: 4,
+      font: "helvetica",
+      lineColor: [220, 220, 220],
+      lineWidth: 0.2,
+    },
+    margin: { top: 42, left: 14, right: 14 },
+  });
+
+  doc.save("DU_Preference_List.pdf");
+};
+
+
+
+  const logout = () => {
+    setUserData(null);
+    localStorage.removeItem("token"); 
+  };
+  
   return (
     <>
       <div className='w-full p-6 flex flex-col items-center'>
@@ -181,7 +410,7 @@ const courseOptions = [
               <NavigationMenuItem>
                 <NavigationMenuTrigger>
                   <Avatar>
-                    <AvatarImage src="https://i.pinimg.com/736x/67/03/9a/67039af73fae67ad98ab22c9436fca02.jpg" />
+                    <AvatarImage src="https://i.pinimg.com/736x/76/6d/ea/766deaf4d28044a4bd09c9d8ef3f9406.jpg" />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                 </NavigationMenuTrigger>
@@ -189,12 +418,12 @@ const courseOptions = [
                   <ul className='w-[200px]'>
                     <li>
                       <NavigationMenuLink className='flex items-center' asChild>
-                        <Link to='/login' className='flex flex-row'><FiLayers className='mr-2' /> My Lists</Link>
+                        <Link to='/my-lists' className='flex flex-row'><FiLayers className='mr-2' /> My Lists</Link>
                       </NavigationMenuLink>
                     </li>
                     <li>
                       <NavigationMenuLink className='flex items-center' asChild>
-                        <Link to='/' className='flex flex-row'><FiLogOut className='mr-2' /> Logout</Link>
+                        <Link to='/' onClick={logout} className='flex flex-row'><FiLogOut className='mr-2' /> Logout</Link>
                       </NavigationMenuLink>
                     </li>
                   </ul>
@@ -263,16 +492,18 @@ const courseOptions = [
                     onSelect={(val) => setCourse(val)}
                     placeholder="Enter Course Name"
                   />
-                  <Button
+                 <Button
+                    disabled={courseList.length >= 5}
                     onClick={() => {
                       if (course && !courseList.includes(course)) {
-                        setCourseList([...courseList, course])
-                        setCourse("")
+                        setCourseList([...courseList, course]);
+                        setCourse("");
                       }
                     }}
                   >
                     <FiPlus />
                   </Button>
+
                 </div>
               </div>
               <Table>
@@ -292,46 +523,53 @@ const courseOptions = [
                   ))}
                 </TableBody>
               </Table>
-              <div className='flex'>
-                <p className='p-5'>College</p>
-                <Slider defaultValue={[0]} max={100} step={100}/> 
-                <p className='p-5'>Course</p>
-              </div>
-              <div className='text-center'>
-                Prioritize College or Course
-              </div>
 
             
             </CardContent>
-            <Button className='sm:ml-70 sm:mr-10 mr-20 ml-20' onClick={generateList}>Generate</Button>
+            <Button className='sm:ml-70 sm:mr-10 mr-20 ml-20' disabled={isProcessing}   onClick={generateList}>Generate</Button>
 
           </Card>
 
           <Separator className='my-10'/>
 
-            <div className={`m-10 ${showList ? 'block' : 'hidden'}`}>
-            <h1>
+           <div className={`m-10 ${showList ? 'block' : 'hidden'}`}>
+            <h1 className='text-xl font-semibold mb-4'>
               Your Personalised Preference List
             </h1>
 
-           <Table >
-          <TableCaption>Shush. here is your preference list</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">S.No.</TableHead>
-              <TableHead>College</TableHead>
-              <TableHead>Course</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody className={`${showList ? 'blur' : ''}`}>
-            <TableRow>
-              <TableCell className="font-medium">1</TableCell>
-              <TableCell>Shri Ram College of Commerce</TableCell>
-              <TableCell>BCom (Hons)</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-        </div>  
+            <Table>
+              <TableCaption>You will be able to access this under my lists</TableCaption>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[100px]">S.No.</TableHead>
+                  <TableHead>College</TableHead>
+                  <TableHead>Course</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {list.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={3}>No results yet</TableCell>
+                  </TableRow>
+                ) : (
+                  list.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableCell className="font-medium">{item.rank || index + 1}</TableCell>
+                      <TableCell>{item.college}</TableCell>
+                      <TableCell>{item.course}</TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+            {list.length > 0 && (
+              <Button className="mt-4" onClick={downloadPDF}>
+                Download as PDF
+              </Button>
+            )}
+
+          </div>
+
     
 
         </div>

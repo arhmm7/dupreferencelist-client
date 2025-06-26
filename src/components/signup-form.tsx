@@ -43,9 +43,9 @@ export function SignupForm({
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/auth/signup", {
-        firstName,
-        lastName,
+      const res = await axios.post(import.meta.env.VITE_BACKEND+"auth/signup", {
+        first_name :firstName,
+        last_name :lastName,
         email,
         password,
         referCode
@@ -134,7 +134,7 @@ export function SignupForm({
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                     onClick={() => setViewPassword(!viewPassword)}
                   >
-                    {viewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    {viewPassword ? <Eye size={18} /> : <EyeOff size={18} />}
                   </button>
                 </div>
               </div>
@@ -158,9 +158,9 @@ export function SignupForm({
                     }
                   >
                     {viewConfirmPassword ? (
-                      <EyeOff size={18} />
-                    ) : (
                       <Eye size={18} />
+                    ) : (
+                      <EyeOff size={18} />
                     )}
                   </button>
                 </div>

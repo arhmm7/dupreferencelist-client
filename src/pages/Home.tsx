@@ -27,9 +27,9 @@ function Home() {
             <Navigation></Navigation>
             </div>
 
-            <div className="w-[90vw] lg:h-[10vh] h-[20vh] flex flex-col justify-center items-center p-2">
-            <h1 className='text-4xl lg:text-6xl  font-sans '>
-                DU Preference List
+            <div className="w-[90vw] text-center lg:h-[30vh] h-[20vh] flex flex-col justify-center items-center p-2">
+            <h1 className='text-3xl lg:text-5xl '>
+                Delhi University <br/> Preference List <br/> Builder
             </h1>   
             </div>
 
