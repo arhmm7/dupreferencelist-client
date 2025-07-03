@@ -19,7 +19,7 @@ function Navigation() {
   const isAuthenticated = !!userData;
 
   return (
-    <NavigationMenu className="pt-5">
+    <NavigationMenu className="">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuLink asChild>

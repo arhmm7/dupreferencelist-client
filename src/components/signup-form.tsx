@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-
 import { Link, useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
 import { useState } from "react"
@@ -25,7 +24,7 @@ export function SignupForm({
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
-  const [referCode, setReferCode] = useState("")
+  const [promoCode, setPromoCode] = useState("")
   const [viewPassword, setViewPassword] = useState(false)
   const [viewConfirmPassword, setViewConfirmPassword] = useState(false)
 
@@ -48,7 +47,7 @@ export function SignupForm({
         last_name :lastName,
         email,
         password,
-        referCode
+        promo_code : promoCode
       })
       console.log(res);
       toast.success("Signed up successfully!")
@@ -108,13 +107,13 @@ export function SignupForm({
               </div>
 
               <div className="grid gap-3">
-                <Label htmlFor="referCode">Refer Code (optional)</Label>
+                <Label htmlFor="promoCode">Promo Code (optional)</Label>
                 <Input
-                  id="referCode"
+                  id="promoCode"
                   type="text"
                   placeholder="e.g. ARH001"
-                  value={referCode}
-                  onChange={(e) => setReferCode(e.target.value)}
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
                 />
               </div>
 

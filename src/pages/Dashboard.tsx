@@ -239,7 +239,7 @@ const generateList = async () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
-        amount: 99,
+        amount: 199,
         user_id: userData?.id,
       }),
     });
@@ -250,6 +250,9 @@ const generateList = async () => {
       toast.error(orderData.message || "Failed to create payment order");
       return;
     }
+    toast.dismiss();
+    toast.success("Payment Created");
+
 
     const { id: razorpay_order_id, amount } = orderData;
 
@@ -284,7 +287,10 @@ const generateList = async () => {
           toast.error(verifyData.message || "Payment verification failed");
           return;
         }
+        toast.dismiss();
+        toast.success("Payment Verified");
 
+        toast.loading("Generating List...");
         const genRes = await fetch(import.meta.env.VITE_BACKEND+"api/generateList", {
           method: "POST",
           headers: {
@@ -306,7 +312,7 @@ const generateList = async () => {
           console.log(data.raw || data.error);
           return;
         }
-
+        toast.dismiss();
         toast.success("List Generated!");
         setList(data.list);
         setShowList(true);
@@ -537,31 +543,31 @@ const downloadPDF = () => {
               Your Personalised Preference List
             </h1>
 
-            <Table>
-              <TableCaption>You will be able to access this under my lists</TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[100px]">S.No.</TableHead>
-                  <TableHead>College</TableHead>
-                  <TableHead>Course</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {list.length === 0 ? (
+              <Table>
+                <TableCaption>You will be able to access this under my lists</TableCaption>
+                <TableHeader>
                   <TableRow>
-                    <TableCell colSpan={3}>No results yet</TableCell>
+                    <TableHead className="w-[100px]">S.No.</TableHead>
+                    <TableHead>College</TableHead>
+                    <TableHead>Course</TableHead>
                   </TableRow>
-                ) : (
-                  list.map((item, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="font-medium">{item.rank || index + 1}</TableCell>
-                      <TableCell>{item.college}</TableCell>
-                      <TableCell>{item.course}</TableCell>
+                </TableHeader>
+                <TableBody>
+                  {list.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={3}>No results yet</TableCell>
                     </TableRow>
-                  ))
-                )}
-              </TableBody>
-            </Table>
+                  ) : (
+                    list.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">{item.rank || index + 1}</TableCell>
+                        <TableCell>{item.college}</TableCell>
+                        <TableCell>{item.course}</TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
             {list.length > 0 && (
               <Button className="mt-4" onClick={downloadPDF}>
                 Download as PDF
